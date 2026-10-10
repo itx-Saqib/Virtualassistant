@@ -7,7 +7,7 @@ const userRoute = require('./routes/user.route')
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://jarvisva.onrender.com",
     credentials:true
 }))
 app.use(cookie());
