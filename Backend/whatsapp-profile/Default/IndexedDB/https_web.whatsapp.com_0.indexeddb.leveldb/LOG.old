@@ -1,0 +1,30 @@
+2026/10/09-23:36:53.022 24dc Reusing MANIFEST D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/10/09-23:36:53.024 24dc Recovering log #175
+2026/10/09-23:36:53.059 24dc Reusing old log D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000175.log 
+2026/10/09-23:40:23.168 6a54 Level-0 table #183: started
+2026/10/09-23:40:23.215 6a54 Level-0 table #183: 1089837 bytes OK
+2026/10/09-23:40:23.219 6a54 Delete type=0 #175
+2026/10/09-23:40:23.221 6a54 Compacting 1@1 + 4@2 files
+2026/10/09-23:40:23.433 6a54 Generated table #184@1: 44781 keys, 2260185 bytes
+2026/10/09-23:40:23.659 6a54 Generated table #185@1: 47442 keys, 2213309 bytes
+2026/10/09-23:40:23.822 6a54 Generated table #186@1: 25020 keys, 2216029 bytes
+2026/10/09-23:40:23.872 6a54 Generated table #187@1: 22893 keys, 934285 bytes
+2026/10/09-23:40:23.872 6a54 Compacted 1@1 + 4@2 files => 7623808 bytes
+2026/10/09-23:40:23.874 6a54 compacted to: files[ 0 0 4 0 0 0 0 ]
+2026/10/09-23:40:23.991 6a54 Level-0 table #189: started
+2026/10/09-23:40:23.999 6a54 Level-0 table #189: 96007 bytes OK
+2026/10/09-23:40:24.002 6a54 Delete type=2 #177
+2026/10/09-23:40:24.002 6a54 Delete type=2 #178
+2026/10/09-23:40:24.002 6a54 Delete type=2 #179
+2026/10/09-23:40:24.002 6a54 Delete type=2 #180
+2026/10/09-23:40:24.002 6a54 Delete type=0 #182
+2026/10/09-23:40:24.002 6a54 Delete type=2 #183
+2026/10/09-23:40:24.009 6a54 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2026/10/09-23:40:24.009 6a54 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x03\x10 \x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x12\x009\x009\x009\x000\x009\x006\x008\x000\x002\x003\x004\x005\x000\x000\x00@\x00l\x00i\x00d' @ 1352980 : 0
+2026/10/09-23:40:24.009 6a54 Compacting 1@1 + 1@2 files
+2026/10/09-23:40:24.098 6a54 Generated table #190@1: 42219 keys, 2039897 bytes
+2026/10/09-23:40:24.098 6a54 Compacted 1@1 + 1@2 files => 2039897 bytes
+2026/10/09-23:40:24.100 6a54 compacted to: files[ 0 0 4 0 0 0 0 ]
+2026/10/09-23:40:24.100 6a54 Delete type=2 #185
+2026/10/09-23:40:24.100 6a54 Delete type=2 #189
+2026/10/09-23:40:24.102 6a54 Manual compaction at level-1 from '\x00\x03\x10 \x03\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x12\x009\x009\x009\x000\x009\x006\x008\x000\x002\x003\x004\x005\x000\x000\x00@\x00l\x00i\x00d' @ 1352980 : 0 .. (end); will stop at (end)

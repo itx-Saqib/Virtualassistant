@@ -1,0 +1,6 @@
+2026/10/09-23:19:15.524 47f0 Reusing MANIFEST D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\Local Storage\leveldb/MANIFEST-000001
+2026/10/09-23:19:15.529 47f0 Recovering log #3
+2026/10/09-23:19:15.537 47f0 Reusing old log D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\Local Storage\leveldb/000003.log 
+2026/10/09-23:45:58.628 47f0 Level-0 table #5: started
+2026/10/09-23:45:58.643 47f0 Level-0 table #5: 18994 bytes OK
+2026/10/09-23:45:58.650 47f0 Delete type=0 #3

@@ -1,0 +1,18 @@
+2026/10/09-23:42:11.032 24dc Reusing MANIFEST D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/10/09-23:42:11.033 24dc Recovering log #188
+2026/10/09-23:42:11.034 24dc Reusing old log D:\coding\fullstack\virtualassistant\Backend\whatsapp-profile\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000188.log 
+2026/10/10-00:04:54.060 24dc Level-0 table #193: started
+2026/10/10-00:04:54.139 24dc Level-0 table #193: 1159939 bytes OK
+2026/10/10-00:04:54.144 24dc Delete type=0 #188
+2026/10/10-00:05:19.284 6a54 Compacting 1@1 + 4@2 files
+2026/10/10-00:05:19.430 6a54 Generated table #194@1: 40771 keys, 2262602 bytes
+2026/10/10-00:05:19.566 6a54 Generated table #195@1: 51975 keys, 2217904 bytes
+2026/10/10-00:05:19.673 6a54 Generated table #196@1: 22362 keys, 2214537 bytes
+2026/10/10-00:05:19.716 6a54 Generated table #197@1: 25670 keys, 1044583 bytes
+2026/10/10-00:05:19.716 6a54 Compacted 1@1 + 4@2 files => 7739626 bytes
+2026/10/10-00:05:19.719 6a54 compacted to: files[ 0 0 4 0 0 0 0 ]
+2026/10/10-00:05:19.720 6a54 Delete type=2 #184
+2026/10/10-00:05:19.720 6a54 Delete type=2 #186
+2026/10/10-00:05:19.720 6a54 Delete type=2 #187
+2026/10/10-00:05:19.720 6a54 Delete type=2 #190
+2026/10/10-00:05:19.720 6a54 Delete type=2 #193
