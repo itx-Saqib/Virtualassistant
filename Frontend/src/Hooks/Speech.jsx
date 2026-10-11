@@ -55,15 +55,14 @@ const handleCommand = (data) => {
 
     // =========================
     // YOUTUBE SEARCH
-    // =========================
-    case "youtube_search": {
-      const cmd = encodeURIComponent(query);
-      window.open(
-        `https://www.youtube.com/results?search_query=${cmd}`,
-        "_blank"
-      );
-      break;
-    }
+    // =========================```js
+case "youtube_search": {
+  window.location.href =
+    `https://www.youtube.com/results?search_query=${encodeURIComponent(query || "")}`;
+  break;
+}
+```
+}
 
     // =========================
     // YOUTUBE PLAY
