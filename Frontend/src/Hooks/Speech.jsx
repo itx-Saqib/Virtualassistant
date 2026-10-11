@@ -77,42 +77,15 @@ case "youtube_play": {
 
     // =========================
     // INSTAGRAM
-    // =========================
-    case "instagram_open": {
-      window.open(
-        "https://www.instagram.com/",
-        "_blank"
-      );
-      break;
-    }
-    case "linkedin_open": {
-      window.open(
-        "https://www.linkedin.com/",
-        "_blank"
-      );
-      break;
-    }
+    case "instagram_open": { window.location.href = "https://www.instagram.com/"; break; }
+    case "linkedin_open": { window.location.href = "https://www.linkedin.com/"; break; }
     // =========================
     // FACEBOOK
-    // =========================
-    case "facebook_open": {
-      window.open(
-        "https://www.facebook.com/",
-        "_blank"
-      );
-      break;
-    }
+    case "facebook_open": { window.location.href = "https://www.facebook.com/"; break; }
 
     // =========================
     // WHATSAPP
-    // =========================
-    case "whatsapp_open": {
-      window.open(
-        "https://web.whatsapp.com/",
-        "_blank"
-      );
-      break;
-    }
+    case"whatsapp_open": { window.location.href = "https://web.whatsapp.com/"; break; }
     case "whatsapp_search": {
   console.log("WhatsApp search completed:", query);
   break;
@@ -140,11 +113,11 @@ case "youtube_play": {
 
     // =========================
     // CALCULATOR
-    // =========================
     case "calculator_open": { window.location.href = "https://www.google.com/search?q=calculator"; break; }
     // =========================
     // WEATHER
-    // =========================case "weather_show": { const searchQuery = query?.trim() || "Faisalabad"; window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery + " weather")}`; break; }
+    // =========================
+    case "weather_show": { const searchQuery = query?.trim() || "Faisalabad"; window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery + " weather")}`; break; }
     // =========================
     // DATE
     // =========================
