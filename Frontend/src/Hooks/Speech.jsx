@@ -61,12 +61,19 @@ case "youtube_search": {
     `https://www.youtube.com/results?search_query=${encodeURIComponent(query || "")}`;
   break;
 }
-```
+    
+case "youtube_play": {
+  if (!videoId) {
+    console.error("YouTube videoId missing:", data);
+    break;
+  }
+
+  const youtubeUrl = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&autoplay=1`;
+
+  window.location.href = youtubeUrl;
+  break;
 }
 
-    // =========================
-    // YOUTUBE PLAY
-   case "youtube_play": { if (!videoId) { console.error("YouTube videoId missing:", data); break; } window.location.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&autoplay=1`; break; }
 
     // =========================
     // INSTAGRAM
