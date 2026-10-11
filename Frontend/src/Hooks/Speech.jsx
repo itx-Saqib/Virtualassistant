@@ -10,30 +10,93 @@ const Speech = ({setAi}) => {
   const isAssistantActiveRef = useRef(false);
   const isSpeakingRef = useRef(false);
 
-  const handleLocalCommand = (text) => {
-  const command = text.toLowerCase();
+  // External command ke liye blank tab API call se pehle open hota hai,
+  // taake browser popup ko block na kare.
+  const commandTabRef = useRef(null);
 
-  const isWhatsApp =
-    /\bwhats\s*app\b|\bwhatsapp\b/.test(command);
+  const prepareCommandTab = (text) => {
+    const command = text.toLowerCase();
+    const wantsNavigation = /\b(open|launch|kholo|khol|kholna|chalao|search|play|weather)\b/.test(command);
+    const hasExternalTarget = /\b(google|youtube|facebook|whatsapp|instagram|linkedin|calculator|weather)\b/.test(command);
 
-  const wantsToOpen =
-    /\b(open|launch|kholo|khol|kholna|chalao)\b/.test(command);
+    if (wantsNavigation && hasExternalTarget) {
+      if (commandTabRef.current && !commandTabRef.current.closed) {
+        commandTabRef.current.close();
+      }
+      commandTabRef.current = window.open("about:blank", "_blank");
+      if (!commandTabRef.current) {
+        console.warn("Popup blocked. Browser settings mein Jarvis ke pop-ups allow karein.");
+      }
+    }
+  };
 
-  if (isWhatsApp && wantsToOpen) {
-    const tab = window.open(
-      "https://web.whatsapp.com/",
-      "_blank"
-    );
+  const openCommandTab = (url) => {
+    const tab = commandTabRef.current;
+    commandTabRef.current = null;
 
-    if (!tab) {
-      console.warn("Browser ne popup block kar diya.");
+    if (tab && !tab.closed) {
+      tab.location.href = url;
+      tab.focus();
+      return;
     }
 
-    return true;
-  }
+    // Fallback: browser popup settings ki wajah se new tab block ho sakta hai.
+    const newTab = window.open(url, "_blank");
+    if (!newTab) {
+      console.warn("Popup blocked. Browser settings mein Jarvis ke pop-ups allow karein.");
+    }
+  };
 
-  return false;
-};
+  // Simple arithmetic ko Gemini/calculator website par bhejne ke bajaye locally solve karo.
+  const handleLocalCalculation = (text) => {
+    const command = text.toLowerCase();
+    const normalized = command
+      .replace(/multiplied\s+by|multiply\s+by|times/g, " * ")
+      .replace(/divided\s+by|divide\s+by/g, " / ")
+      .replace(/plus|added\s+to/g, " + ")
+      .replace(/minus|subtract/g, " - ")
+      .replace(/[×]/g, " * ")
+      .replace(/[÷]/g, " / ");
+
+    const looksLikeCalculation = /\b(calculate|compute|solve|sum|addition|add|subtract|minus|multiply|times|divide|divided|plus|what is)\b/.test(command);
+    if (!looksLikeCalculation) return false;
+
+    let match = normalized.match(/(-?\d+(?:\.\d+)?)\s*([+*/-])\s*(-?\d+(?:\.\d+)?)/);
+
+    // Example: "sum of 2 and 5" / "add 2 and 5"
+    if (!match && /\b(sum|add|addition)\b/.test(command)) {
+      const numbers = command.match(/-?\d+(?:\.\d+)?/g);
+      if (numbers && numbers.length >= 2) {
+        match = [null, numbers[0], "+", numbers[1]];
+      }
+    }
+
+    if (!match) return false;
+
+    const first = Number(match[1]);
+    const operator = match[2];
+    const second = Number(match[3]);
+    let answer;
+
+    switch (operator) {
+      case "+": answer = first + second; break;
+      case "-": answer = first - second; break;
+      case "*": answer = first * second; break;
+      case "/":
+        if (second === 0) {
+          speak("Zero se divide nahi kar sakte.");
+          return true;
+        }
+        answer = first / second;
+        break;
+      default: return false;
+    }
+
+    console.log("Local calculation:", { first, operator, second, answer });
+    speak(`The answer is ${answer}`);
+    return true;
+  };
+
   // ==========================================
   // TEXT TO SPEECH
   // ==========================================
@@ -46,21 +109,17 @@ const handleCommand = (data) => {
     // =========================
     case "google_search": {
       const cmd = encodeURIComponent(query);
-      window.open(
-        `https://www.google.com/search?q=${cmd}`,
-        "_blank"
-      );
+      openCommandTab(`https://www.google.com/search?q=${cmd}`);
       break;
     }
 
     // =========================
     // YOUTUBE SEARCH
-    // =========================```js
-case "youtube_search": {
-  window.location.href =
-    `https://www.youtube.com/results?search_query=${encodeURIComponent(query || "")}`;
-  break;
-}
+    // =========================
+    case "youtube_search": {
+      openCommandTab(`https://www.youtube.com/results?search_query=${encodeURIComponent(query || "")}`);
+      break;
+    }
     
 case "youtube_play": {
   if (!videoId) {
@@ -69,23 +128,22 @@ case "youtube_play": {
   }
 
   const youtubeUrl = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&autoplay=1`;
-
-  window.location.href = youtubeUrl;
+  openCommandTab(youtubeUrl);
   break;
 }
 
 
     // =========================
     // INSTAGRAM
-    case "instagram_open": { window.location.href = "https://www.instagram.com/"; break; }
-    case "linkedin_open": { window.location.href = "https://www.linkedin.com/"; break; }
+    case "instagram_open": { openCommandTab("https://www.instagram.com/"); break; }
+    case "linkedin_open": { openCommandTab("https://www.linkedin.com/"); break; }
     // =========================
     // FACEBOOK
-    case "facebook_open": { window.location.href = "https://www.facebook.com/"; break; }
+    case "facebook_open": { openCommandTab("https://www.facebook.com/"); break; }
 
     // =========================
     // WHATSAPP
-    case"whatsapp_open": { window.location.href = "https://web.whatsapp.com/"; break; }
+    case "whatsapp_open": { openCommandTab("https://web.whatsapp.com/"); break; }
     case "whatsapp_search": {
   console.log("WhatsApp search completed:", query);
   break;
@@ -113,11 +171,11 @@ case "youtube_play": {
 
     // =========================
     // CALCULATOR
-    case "calculator_open": { window.location.href = "https://www.google.com/search?q=calculator"; break; }
+    case "calculator_open": { openCommandTab("https://www.google.com/search?q=calculator"); break; }
     // =========================
     // WEATHER
     // =========================
-    case "weather_show": { const searchQuery = query?.trim() || "Faisalabad"; window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery + " weather")}`; break; }
+    case "weather_show": { const searchQuery = query?.trim() || "Faisalabad"; openCommandTab(`https://www.google.com/search?q=${encodeURIComponent(searchQuery + " weather")}`); break; }
     // =========================
     // DATE
     // =========================
@@ -346,6 +404,9 @@ recognition.maxAlternatives = 3;
       if (isAssistantActiveRef.current) {
         console.log("🚀 Assistant active");
 
+        if (handleLocalCalculation(transcript)) return;
+        prepareCommandTab(transcript);
+
         try {
           const result =
             await askToAssistant(transcript);
@@ -422,6 +483,9 @@ recognition.maxAlternatives = 3;
         "🚀 Sending prompt:",
         command
       );
+
+      if (handleLocalCalculation(command)) return;
+      prepareCommandTab(command);
 
       try {
         const result =
@@ -532,4 +596,3 @@ recognition.maxAlternatives = 3;
 };
 
 export default Speech;
-
