@@ -67,21 +67,7 @@ const handleCommand = (data) => {
 
     // =========================
     // YOUTUBE PLAY
-    // =========================
-
-case "youtube_play": {
-  if (!videoId) {
-    console.error("YouTube videoId missing:", data);
-    break;
-  }
-
-  window.open(
-    `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&autoplay=1`,
-    "_blank"
-  );
-
-  break;
-}
+   case "youtube_play": { if (!videoId) { console.error("YouTube videoId missing:", data); break; } window.location.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&autoplay=1`; break; }
 
     // =========================
     // INSTAGRAM
@@ -149,27 +135,10 @@ case "youtube_play": {
     // =========================
     // CALCULATOR
     // =========================
-    case "calculator_open": {
-      window.open(
-        "https://www.google.com/search?q=calculator",
-        "_blank"
-      );
-      break;
-    }
+    case "calculator_open": { window.location.href = "https://www.google.com/search?q=calculator"; break; }
     // =========================
     // WEATHER
-    // =========================
-    case "weather_show": {
-      const cmd = encodeURIComponent(query);
-
-      window.open(
-        `https://www.google.com/search?q=${cmd}+weather`,
-        "_blank"
-      );
-
-      break;
-    }
-
+    // =========================case "weather_show": { const searchQuery = query?.trim() || "Faisalabad"; window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery + " weather")}`; break; }
     // =========================
     // DATE
     // =========================
